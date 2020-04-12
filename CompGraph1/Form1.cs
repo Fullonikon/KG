@@ -391,5 +391,61 @@ namespace CompGraph1
             pictureBox2.Image = resultImage;
             pictureBox2.Refresh();
         }
+        private void readelem(int [,] a)
+        {
+            a[0, 0] = (int)numericUpDown1.Value;
+            a[1, 0] = (int)numericUpDown2.Value;
+            a[2, 0] = (int)numericUpDown3.Value;
+            a[0, 1] = (int)numericUpDown4.Value;
+            a[1, 1] = (int)numericUpDown5.Value;
+            a[2, 1] = (int)numericUpDown6.Value;
+            a[0, 2] = (int)numericUpDown7.Value;
+            a[1, 2] = (int)numericUpDown8.Value;
+            a[2, 2] = (int)numericUpDown9.Value;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int[,] a = new int[3, 3];
+            readelem(a);
+            Delation1 filter = new Delation1();
+            Bitmap resultImage = filter.processImage(image, a);
+            pictureBox2.Image = resultImage;
+            pictureBox2.Refresh();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int[,] a = new int[3, 3];
+            readelem(a);
+            Erosion1 filter = new Erosion1();
+            Bitmap resultImage = filter.processImage(image, a);
+            pictureBox2.Image = resultImage;
+            pictureBox2.Refresh();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int[,] a = new int[3, 3];
+            readelem(a);
+            Erosion1 filter = new Erosion1();
+            Bitmap resultImage = filter.processImage(image, a);
+            Delation1 filter1 = new Delation1();
+            Bitmap resultImage1 = filter1.processImage(resultImage, a);
+
+            pictureBox2.Image = resultImage1;
+            pictureBox2.Refresh();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int[,] a = new int[3, 3];
+            readelem(a);
+            Delation1 filter = new Delation1();
+            Bitmap resultImage = filter.processImage(image, a);
+            Erosion1 filter1 = new Erosion1();
+            Bitmap resultImage1 = filter1.processImage(resultImage, a);
+            pictureBox2.Image = resultImage1;
+            pictureBox2.Refresh();
+        }
     }
 }

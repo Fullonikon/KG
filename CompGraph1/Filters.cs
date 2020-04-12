@@ -446,6 +446,50 @@ namespace CompGraph1
             return resultImage;
         }
     }
+    class Delation1
+    {
+        public Bitmap processImage(Bitmap sourceImage, int [,] mask)
+        {
+            int W = sourceImage.Width;
+            int H = sourceImage.Height;
+            Bitmap resultImage = new Bitmap(W, H);
+
+            // УСТАНОВИТЬ РАЗМЕРЫ СТРУКТУРНОГО ЭЛЕМЕНТА
+            int MW = 3;
+            int MH = 3;
+            for (int y = MH / 2; y < H - MH / 2; y++)
+            {
+                for (int x = MW / 2; x < W - MW / 2; x++)
+                {
+                    int max1 = 0;
+
+                    int max2 = 0;
+
+                    int max3 = 0;
+                    for (int j = -MH / 2; j <= MH / 2; j++)
+                    {
+                        for (int i = -MW / 2; i <= MW / 2; i++)
+                        {
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R > max1))
+                            {
+                                max1 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R > max2))
+                            {
+                                max2 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R > max3))
+                            {
+                                max3 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                        }
+                        resultImage.SetPixel(x, y, Color.FromArgb(max1, max2, max3));
+                    }
+                }
+            }
+            return resultImage;
+        }
+    }
     class Erosion
     {
         public Bitmap processImage(Bitmap sourceImage)
@@ -472,6 +516,50 @@ namespace CompGraph1
             mask[2, 2] = 0;
 
 
+            for (int y = MH / 2; y < H - MH / 2; y++)
+            {
+                for (int x = MW / 2; x < W - MW / 2; x++)
+                {
+                    int min1 = 255;
+
+                    int min2 = 255;
+
+                    int min3 = 255;
+                    for (int j = -MH / 2; j <= MH / 2; j++)
+                    {
+                        for (int i = -MW / 2; i <= MW / 2; i++)
+                        {
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R < min1))
+                            {
+                                min1 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R < min2))
+                            {
+                                min2 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                            if ((mask[i + MW / 2, j + MH / 2] == 1) && (sourceImage.GetPixel(x + i, y + j).R < min3))
+                            {
+                                min3 = sourceImage.GetPixel(x + i, y + j).R;
+                            }
+                        }
+                        resultImage.SetPixel(x, y, Color.FromArgb(min1, min2, min3));
+                    }
+                }
+            }
+            return resultImage;
+        }
+    }
+    class Erosion1
+    {
+        public Bitmap processImage(Bitmap sourceImage, int [,] mask)
+        {
+            int W = sourceImage.Width;
+            int H = sourceImage.Height;
+            Bitmap resultImage = new Bitmap(W, H);
+
+            // УСТАНОВИТЬ РАЗМЕРЫ СТРУКТУРНОГО ЭЛЕМЕНТА
+            int MW = 3;
+            int MH = 3;
             for (int y = MH / 2; y < H - MH / 2; y++)
             {
                 for (int x = MW / 2; x < W - MW / 2; x++)
